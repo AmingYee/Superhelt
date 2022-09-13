@@ -33,7 +33,7 @@ public class Main {
                         } else if (humanOrNot == false) {
                             System.out.println("er ikke menneske");
                         }
-                    }/*catch (InputMismatchException e) {
+                    }/*catch (InputMismatchException a) {
                         System.out.println("indtast true/false i små bogstaver");
                     }*/
                 } while (humanOrNot == null);
