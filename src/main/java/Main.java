@@ -20,11 +20,9 @@ public class Main {
                 System.out.println("indtast superheltens navn");
                 String superHeroName = sc.next();
                 sc.nextLine();
-                System.out.println("superheltens navn: " + superHeroName);
                 System.out.println("indtast virkiligt navn");
                 String realName = sc.next();
                 sc.nextLine();
-                System.out.println("virkeligt navn: " + realName);
                 System.out.println("menneske eller ej true/false");
                 Boolean humanOrNot = null;
                 boolean humanLoopEndValue = true;
@@ -38,19 +36,33 @@ public class Main {
                         sc.nextLine();
                     }
                 }while(humanLoopEndValue);
-                System.out.println("er han menneske: " + humanOrNot);
                 System.out.println("indtast året han blev lavet");
-                int creationYear = sc.nextInt();
-                sc.nextLine();
-                System.out.println("året han blev lavet: " + creationYear);
+                int creationYear = 0;
+                boolean creationLoopEndValue = true;
+                do{
+                    if (sc.hasNextInt()){
+                        creationYear = sc.nextInt();
+                        creationLoopEndValue = false;
+                    } else {
+                        System.out.println("indtast året han blev lavet i hele tal");
+                        sc.nextLine();
+                    }
+                }while (creationLoopEndValue);
                 System.out.println("indtast superkraft");
                 String superPower = sc.next();
                 sc.nextLine();
-                System.out.println("superkraft: " + superPower);
-                System.out.println("Indtast styrkeværdi");
-                double strenght = sc.nextInt();
-                sc.nextLine();
-                System.out.println("styrke værdi: " + strenght);
+                System.out.println("Indtast styrkeværdi 1.0 svarer til normalt menneske");
+                double strenght = 0;
+                boolean strenghtLoopEndValue = true;
+                do{
+                    if (sc.hasNextInt()){
+                        strenght = sc.nextInt();
+                        strenghtLoopEndValue = false;
+                    } else {
+                        System.out.println("indtast styrkeværdi i tal 1.0 svarer til normal mennske");
+                        sc.nextLine();
+                    }
+                }while (strenghtLoopEndValue);
                 database.superhero(superHeroName, realName, humanOrNot, creationYear, superPower, strenght);
             }
         }
