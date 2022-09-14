@@ -20,7 +20,7 @@ public class Superhero {
     public String getRealName() {
         return realName;
     }
-    public boolean gethumanOrNot() {
+    public boolean isHumanOrNot() {
         return humanOrNot;
     }
     public int getCreationYear() {
@@ -31,8 +31,5 @@ public class Superhero {
     }
     public double getStrenght() {
         return strenght;
-    }
-    public String toString() {
-        return superHeroName + " " + realName + " " + humanOrNot + " " + creationYear + " " + superPower + " " +strenght;
     }
 }
