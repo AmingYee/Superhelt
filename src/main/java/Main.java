@@ -24,19 +24,24 @@ public class Main {
                 System.out.println("indtast virkiligt navn");
                 String realName = sc.next();
                 sc.nextLine();
-                System.out.println("menneske eller ej true/false");
-                Boolean humanOrNot = null;
+                System.out.println("menneske eller ej (j)a/(n)ej");
+                String jaNej;
+                Boolean humanOrNot = false;
                 boolean humanLoopEndValue = true;
                 do {
-                    if (sc.hasNextBoolean()) {
-                        humanOrNot = sc.nextBoolean();
-                        sc.nextLine();
+                    jaNej = sc.next();
+                    if (jaNej.contains("j")){
+                        humanOrNot = true;
                         humanLoopEndValue = false;
-                    } else {
-                        System.out.println("indtast true/false i små bogstaver");
-                        sc.nextLine();
                     }
-                } while (humanLoopEndValue);
+                    else if (jaNej.contains("n")){
+                        humanOrNot = false;
+                        humanLoopEndValue = false;
+                    }
+                    else {
+                        System.out.println("indtast j eller n");
+                    }
+                } while(humanLoopEndValue);
                 System.out.println("indtast året han blev lavet");
                 int creationYear = 0;
                 boolean creationLoopEndValue = true;
@@ -65,7 +70,8 @@ public class Main {
                     }
                 } while (strenghtLoopEndValue);
                 database.createSuperHero(superHeroName, realName, humanOrNot, creationYear, superPower, strenght);
-            } else if (menuValg == 2) {
+            }
+            else if (menuValg == 2) {
                 System.out.println("Liste af superhelte");
                 for (Superhero superhero : database.getAllSuperHeroes()) {
                     System.out.println("Superheltenavn: " + superhero.getSuperHeroName());
@@ -76,7 +82,8 @@ public class Main {
                     System.out.println("Styrke : " + superhero.getStrenght());
                 }
             }
-        }
+            }
         while (menuValg != 9);
+        }
+
     }
-}

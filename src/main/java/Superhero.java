@@ -5,6 +5,7 @@ public class Superhero {
     private int creationYear;
     private String superPower;
     private double strenght;
+    private String heroSearchTerm;
 
     public Superhero(String superHeroName , String realName , boolean humanOrNot , int creationYear , String superPower , double strenght){
         this.superHeroName = superHeroName;
@@ -20,8 +21,15 @@ public class Superhero {
     public String getRealName() {
         return realName;
     }
-    public boolean isHumanOrNot() {
-        return humanOrNot;
+    public String isHumanOrNot() {
+        String humanJaNej = "";
+        if(humanOrNot==true) {
+            humanJaNej = "Ja";
+        }
+        else if (humanOrNot==false){
+            humanJaNej = "Nej";
+        }
+        return humanJaNej;
     }
     public int getCreationYear() {
         return creationYear;
