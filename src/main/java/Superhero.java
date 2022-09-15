@@ -41,6 +41,6 @@ public class Superhero {
         return strenght;
     }
     public String toString(){
-        return superHeroName + " " + realName + " " + humanOrNot + " " + creationYear + " " + superPower + " " + strenght;
+        return "Superheltenavn: " + superHeroName + "\nSuperkraft: " + superPower + "\nVirkeligt navn: " + realName + "\nOprindelsesår: " + creationYear + "\nEr menneske: " + humanOrNot + "\nStyrke:" + strenght;
     }
 }

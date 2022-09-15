@@ -12,7 +12,7 @@ public class Database {
     public Superhero heroSearch (String heroSearchTerm){
         for (Superhero hero : superheroes){
             if (hero.getSuperHeroName().equalsIgnoreCase(heroSearchTerm)){
-             return hero;
+                return hero;
             }
             else if (hero.getSuperHeroName().contains(heroSearchTerm)){
                 return hero;
