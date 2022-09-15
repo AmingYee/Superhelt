@@ -40,4 +40,7 @@ public class Superhero {
     public double getStrenght() {
         return strenght;
     }
+    public String toString(){
+        return superHeroName;
+    }
 }
