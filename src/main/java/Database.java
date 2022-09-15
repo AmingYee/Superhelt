@@ -9,4 +9,15 @@ public class Database {
     public ArrayList<Superhero> getAllSuperHeroes(){
         return superheroes;
     }
+    public Superhero heroSearch (String heroSearchTerm){
+        for (Superhero hero : superheroes){
+            if (hero.getSuperHeroName().equalsIgnoreCase(heroSearchTerm)){
+             return hero;
+            }
+            else if (hero.getSuperHeroName().contains(heroSearchTerm)){
+                return hero;
+            }
+        }
+        return null;
+    }
 }

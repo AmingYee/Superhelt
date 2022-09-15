@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Database database = new Database();
+        UI userInterface = new UI();
         System.out.println("Velkommen til superhelteverdenen!");
         System.out.println("---------------------------------------");
 
@@ -12,6 +13,7 @@ public class Main {
         do {
             System.out.println("(1) for at oprette ny superhelt");
             System.out.println("(2) for at se liste");
+            System.out.println("(3) for at søge i listen");
             System.out.println("(9) for at afslutte");
             menuValg = sc.nextInt();
             sc.nextLine();
@@ -30,11 +32,11 @@ public class Main {
                 boolean humanLoopEndValue = true;
                 do {
                     jaNej = sc.next();
-                    if (jaNej.contains("j")){
+                    if (jaNej.equalsIgnoreCase("j")){
                         humanOrNot = true;
                         humanLoopEndValue = false;
                     }
-                    else if (jaNej.contains("n")){
+                    else if (jaNej.equalsIgnoreCase("n")){
                         humanOrNot = false;
                         humanLoopEndValue = false;
                     }
@@ -80,6 +82,17 @@ public class Main {
                     System.out.println("Oprindelsesår: " + superhero.getCreationYear());
                     System.out.println("Er menneske: " + superhero.isHumanOrNot());
                     System.out.println("Styrke : " + superhero.getStrenght());
+                    System.out.println("-----------");
+                }
+            }
+            else if (menuValg == 3){
+                System.out.println("Indtast det du vil søge efter");
+                String heroSearchTerm = sc.next();
+                if (database.heroSearch(heroSearchTerm) != null){
+                    System.out.println("hero found: " + database.heroSearch(heroSearchTerm));
+                }
+                else {
+                    System.out.println("Findes ikke i databasen");
                 }
             }
             }
