@@ -13,6 +13,7 @@ public class UI {
             System.out.println("(1) for at oprette ny superhelt");
             System.out.println("(2) for at se liste");
             System.out.println("(3) for at søge i listen");
+            System.out.println("(4) for at søge og redigere i listen");
             System.out.println("(9) for at afslutte");
             menuValg = sc.nextInt();
             sc.nextLine();
@@ -23,7 +24,10 @@ public class UI {
                 program.getList();
             } else if (menuValg == 3) {
                 program.getSearch();
+            } else if (menuValg == 4) {
+                program.getAdvancedSearch();
             }
+
         }
         while (menuValg != 9);
     }
@@ -57,6 +61,7 @@ public class UI {
         do {
             if (sc.hasNextInt()) {
                 creationYear = sc.nextInt();
+                sc.nextLine();
                 creationLoopEndValue = false;
             } else {
                 System.out.println("indtast året han blev lavet i hele tal");
@@ -104,8 +109,12 @@ public class UI {
         }
 
     }
-
-    public void startUp() {
+    private void getAdvancedSearch() {
+        System.out.println("Indtast det du vil søge efter");
+        String advancedHeroSearchTerm = sc.next();
+        database.advancedHeroSearch(advancedHeroSearchTerm);
+    }
+     public void startUp() {
         UI program = new UI();
         program.getvelkommen();
     }
