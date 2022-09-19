@@ -149,7 +149,7 @@ public class UI {
         String searchAndEditTerm = sc.next();
         ArrayList<Superhero> søgeResultat = database.searchAndEdit(searchAndEditTerm);
         if (!søgeResultat.isEmpty())
-        System.out.println("indtast nr på den person der skal redigeres:");
+        System.out.println("indtast nr på den superhelt der skal redigeres:");
         int nr = sc.nextInt();
         sc.nextLine();
         Superhero editHero = søgeResultat.get(nr - 1);
