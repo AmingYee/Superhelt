@@ -9,7 +9,8 @@ public class UI {
         System.out.println("Velkommen til superhelteverdenen!");
         System.out.println("---------------------------------------");
         UI program = new UI();
-        int menuValg;
+        String menuValg;
+        Boolean velkommenLoopEndValue = true;
         System.out.println("Velkommen til superhelte database");
         do {
             System.out.println("(1) for at oprette ny superhelt");
@@ -18,25 +19,28 @@ public class UI {
             System.out.println("(4) for at søge på flere superhelte i listen");
             System.out.println("(5) for at redigere");
             System.out.println("(9) for at afslutte");
-            menuValg = sc.nextInt();
+            menuValg = sc.next();
             sc.nextLine();
-
-            if (menuValg == 1) {
+            if (menuValg.equals("1")) {
+                velkommenLoopEndValue = false;
                 program.getOpret();
-            } else if (menuValg == 2) {
+            } else if (menuValg.equals("2")) {
+                velkommenLoopEndValue = false;
                 program.getList();
-            } else if (menuValg == 3) {
+            } else if (menuValg.equals("3")) {
+                velkommenLoopEndValue = false;
                 program.getSearch();
-            } else if (menuValg == 4) {
+            } else if (menuValg.equals("4")) {
+                velkommenLoopEndValue = false;
                 program.getAdvancedSearch();
-            } else if (menuValg == 5) {
+            } else if (menuValg.equals("5")) {
+                velkommenLoopEndValue = false;
                 program.getSearchAndEdit();
             }
 
         }
-        while (menuValg != 9);
+        while (velkommenLoopEndValue);
     }
-
     private void getOpret() {
         System.out.println("indtast superheltens navn");
         String superHeroName = sc.next();
@@ -90,7 +94,6 @@ public class UI {
         } while (strenghtLoopEndValue);
         database.createSuperHero(superHeroName, realName, humanOrNot, creationYear, superPower, strenght);
     }
-
     private void getList() {
         System.out.println("Liste af superhelte");
         for (Superhero superhero : database.getAllSuperHeroes()) {
@@ -103,7 +106,6 @@ public class UI {
             System.out.println("-----------");
         }
     }
-
     private void getSearch() {
         System.out.println("Indtast det du vil søge efter");
         String heroSearchTerm = sc.next();
@@ -114,7 +116,6 @@ public class UI {
         }
 
     }
-
     private void getAdvancedSearch() {
         String advancedHeroSearchTerm = sc.next();
         ArrayList<Superhero> søgeResultat = database.advancedHeroSearch(advancedHeroSearchTerm);
@@ -187,8 +188,8 @@ public class UI {
         else
             System.out.println("Der findes ingen personer i listen med navn: " + "\"" + searchAndEditTerm + "\"");
     }
-        public void startUp () {
-            UI program = new UI();
-            program.getvelkommen();
-        }
+    public void startUp () {
+        UI program = new UI();
+        program.getvelkommen();
     }
+}
