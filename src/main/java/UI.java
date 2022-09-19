@@ -149,7 +149,7 @@ public class UI {
         System.out.println("Indtast det du vil søge efter");
         String searchAndEditTerm = sc.next();
         ArrayList<Superhero> søgeResultat = database.searchAndEdit(searchAndEditTerm);
-        if (!søgeResultat.isEmpty()) {
+        if (database.searchAndEdit(searchAndEditTerm) != null) {
             for (int i = 0; i < søgeResultat.size(); i++) {
                 System.out.println(i + 1 + ":" + søgeResultat.get(i));
             }
@@ -189,7 +189,7 @@ public class UI {
             if (!newStrenght.isEmpty())
                 editHero.setStrenght(newStrenght);
         }
-        else if (søgeResultat.isEmpty()){
+        else{
             System.out.println("Der findes ingen superhelt i databasen som hedder " + searchAndEditTerm);
         }
     }
