@@ -44,9 +44,6 @@ public class Database {
                 System.out.println(i + 1 + ":" + søgeResultat.get(i));
             }
             }
-            else {
-                System.out.println("Der er ikke noget der matcher " + searchAndEditTerm + " i databasen");
-            }
             return superheroes;
         } return null;
     }

@@ -64,6 +64,7 @@ public class UI {
             }
         } while (humanLoopEndValue);
         System.out.println("indtast året han blev lavet");
+        sc.nextLine();
         int creationYear = 0;
         boolean creationLoopEndValue = true;
         do {
@@ -80,11 +81,12 @@ public class UI {
         String superPower = sc.next();
         sc.nextLine();
         System.out.println("Indtast styrkeværdi 1.0 svarer til normalt menneske");
+        sc.nextLine();
         double strenght = 0;
         boolean strenghtLoopEndValue = true;
         do {
-            if (sc.hasNextInt()) {
-                strenght = sc.nextInt();
+            if (sc.hasNextDouble()) {
+                strenght = sc.nextDouble();
                 strenghtLoopEndValue = false;
             } else {
                 System.out.println("indtast styrkeværdi i tal 1.0 svarer til normal mennske");
@@ -144,48 +146,49 @@ public class UI {
             }
         }
     }
-    private void getSearchAndEdit(){
+    private void getSearchAndEdit() {
         System.out.println("Indtast det du vil søge efter");
         String searchAndEditTerm = sc.next();
         ArrayList<Superhero> søgeResultat = database.searchAndEdit(searchAndEditTerm);
-        if (!søgeResultat.isEmpty())
-        System.out.println("indtast nr på den superhelt der skal redigeres:");
-        int nr = sc.nextInt();
-        sc.nextLine();
-        Superhero editHero = søgeResultat.get(nr - 1);
-        System.out.println("Editperson: " + editHero);
-        System.out.println("Rediger data og tryk ENTER. Hvis data ikke skal redigeres tryk ENTER");
-        System.out.println("Superheltnavn: " + editHero.getSuperHeroName());
-        String newSuperHeroName = sc.nextLine();
-        if (!newSuperHeroName.isEmpty())
-            editHero.setSuperHeroName(newSuperHeroName);
+        if (!søgeResultat.isEmpty()) {
+            System.out.println("indtast nr på den superhelt der skal redigeres:");
+            int nr = sc.nextInt();
+            sc.nextLine();
+            Superhero editHero = søgeResultat.get(nr - 1);
+            System.out.println("Editperson: " + editHero);
+            System.out.println("Rediger data og tryk ENTER. Hvis data ikke skal redigeres tryk ENTER");
+            System.out.println("Superheltnavn: " + editHero.getSuperHeroName());
+            String newSuperHeroName = sc.nextLine();
+            if (!newSuperHeroName.isEmpty())
+                editHero.setSuperHeroName(newSuperHeroName);
 
-        System.out.println("Superkraft: " + editHero.getSuperPower());
-        String newSuperPower = sc.nextLine();
-        if (!newSuperPower.isEmpty())
-            editHero.setSuperPower(newSuperPower);
+            System.out.println("Superkraft: " + editHero.getSuperPower());
+            String newSuperPower = sc.nextLine();
+            if (!newSuperPower.isEmpty())
+                editHero.setSuperPower(newSuperPower);
 
-        System.out.println("Virkelight navn: " + editHero.getRealName());
-        String newRealName = sc.nextLine();
-        if (!newRealName.isEmpty())
-            editHero.setRealName(newRealName);
+            System.out.println("Virkelight navn: " + editHero.getRealName());
+            String newRealName = sc.nextLine();
+            if (!newRealName.isEmpty())
+                editHero.setRealName(newRealName);
 
-        System.out.println("Oprindelsesår: " + editHero.getCreationYear());
-        String newCreationYear = sc.nextLine();
-        if (!newCreationYear.isEmpty())
-            editHero.setCreationYear(newCreationYear);
+            System.out.println("Oprindelsesår: " + editHero.getCreationYear());
+            String newCreationYear = sc.nextLine();
+            if (!newCreationYear.isEmpty())
+                editHero.setCreationYear(newCreationYear);
 
-        System.out.println("Menneske eller ej (j)a/(n)ej: " + editHero.isHumanOrNot());
-        String newHumanOrNot = sc.nextLine();
-        if (!newHumanOrNot.isEmpty())
-            editHero.setHumanOrNot(newHumanOrNot);
+            System.out.println("Menneske eller ej (j)a/(n)ej: " + editHero.isHumanOrNot());
+            String newHumanOrNot = sc.nextLine();
+            if (!newHumanOrNot.isEmpty())
+                editHero.setHumanOrNot(newHumanOrNot);
 
-        System.out.println("Styrkeværdi: " + editHero.getStrenght());
-        String newStrenght = sc.nextLine();
-        if (!newStrenght.isEmpty())
-            editHero.setStrenght(newStrenght);
-        else
+            System.out.println("Styrkeværdi: " + editHero.getStrenght());
+            String newStrenght = sc.nextLine();
+            if (!newStrenght.isEmpty())
+                editHero.setStrenght(newStrenght);
+        } else {
             System.out.println("Der findes ingen personer i listen med navn: " + "\"" + searchAndEditTerm + "\"");
+        }
     }
     public void startUp () {
         UI program = new UI();
