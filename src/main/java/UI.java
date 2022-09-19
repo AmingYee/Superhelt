@@ -22,20 +22,17 @@ public class UI {
             menuValg = sc.next();
             sc.nextLine();
             if (menuValg.equals("1")) {
-                velkommenLoopEndValue = false;
                 program.getOpret();
             } else if (menuValg.equals("2")) {
-                velkommenLoopEndValue = false;
                 program.getList();
             } else if (menuValg.equals("3")) {
-                velkommenLoopEndValue = false;
                 program.getSearch();
             } else if (menuValg.equals("4")) {
-                velkommenLoopEndValue = false;
                 program.getAdvancedSearch();
             } else if (menuValg.equals("5")) {
-                velkommenLoopEndValue = false;
                 program.getSearchAndEdit();
+            } else if (menuValg.equals("9")) {
+                velkommenLoopEndValue = false;
             } else {
                 System.out.println("indtast et tal fra menues for at fortsætte");
             }
