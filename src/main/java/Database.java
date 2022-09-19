@@ -24,16 +24,33 @@ public class Database {
         return null;
     }
 
-    public void advancedHeroSearch(String advancedHeroSearchTerm) {
+    public ArrayList<Superhero> advancedHeroSearch(String advancedHeroSearchTerm) {
         ArrayList<Superhero> søgeResultat = new ArrayList<>();
-        for (Superhero p : superheroes) {
-            if (p.getSuperHeroName().contains(advancedHeroSearchTerm)) {
-                søgeResultat.add(p);
+        for (Superhero hero : superheroes) {
+            if (hero.getSuperHeroName().contains(advancedHeroSearchTerm)) {
+                søgeResultat.add(hero);
+            }
+            return superheroes;
+        } return null;
+    }
+    public ArrayList<Superhero> searchAndEdit(String searchAndEditTerm){
+        ArrayList<Superhero> søgeResultat = new ArrayList<>();
+        for (int i = 0; i < søgeResultat.size(); i++) {
+            System.out.println(i + 1 + ":" + søgeResultat.get(i));
+        }
+        return superheroes;
+    }
+}
+ /*   public void advancedHeroSearch(String advancedHeroSearchTerm) {
+        ArrayList<Superhero> søgeResultat = new ArrayList<>();
+        for (Superhero hero : superheroes) {
+            if (hero.getSuperHeroName().contains(advancedHeroSearchTerm)) {
+                søgeResultat.add(hero);
             }
         }
         if (!søgeResultat.isEmpty())
-            for (Superhero p : søgeResultat)
-                System.out.println("-----------------");
+            for (Superhero hero : søgeResultat)
+                System.out.println(hero);
         else
             System.out.println("Der findes ingen personer i listen med navn: " + "\"" + advancedHeroSearchTerm + "\"");
 
@@ -66,7 +83,7 @@ public class Database {
         if (!newCreationYear.isEmpty())
             editHero.setCreationYear(newCreationYear);
 
-        System.out.println("Menneske eller ej: " + editHero.isHumanOrNot());
+        System.out.println("Menneske eller ej (j)a/(n)ej: " + editHero.isHumanOrNot());
         String newHumanOrNot = sc.nextLine();
         if (!newHumanOrNot.isEmpty())
             editHero.setHumanOrNot(newHumanOrNot);
@@ -75,5 +92,4 @@ public class Database {
         String newStrenght = sc.nextLine();
         if (!newStrenght.isEmpty())
             editHero.setStrenght(newStrenght);
-    }
-}
+    }*/

@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
     Database database = new Database();
     Scanner sc = new Scanner(System.in);
+
     private void getvelkommen() {
         System.out.println("Velkommen til superhelteverdenen!");
         System.out.println("---------------------------------------");
@@ -12,8 +14,9 @@ public class UI {
         do {
             System.out.println("(1) for at oprette ny superhelt");
             System.out.println("(2) for at se liste");
-            System.out.println("(3) for at søge i listen");
-            System.out.println("(4) for at søge og redigere i listen");
+            System.out.println("(3) for at søge på enkelt superhelt i listen");
+            System.out.println("(4) for at søge på flere superhelte i listen");
+            System.out.println("(5) for at redigere");
             System.out.println("(9) for at afslutte");
             menuValg = sc.nextInt();
             sc.nextLine();
@@ -26,6 +29,8 @@ public class UI {
                 program.getSearch();
             } else if (menuValg == 4) {
                 program.getAdvancedSearch();
+            } else if (menuValg == 5) {
+                program.getSearchAndEdit();
             }
 
         }
@@ -109,13 +114,78 @@ public class UI {
         }
 
     }
+
     private void getAdvancedSearch() {
-        System.out.println("Indtast det du vil søge efter");
         String advancedHeroSearchTerm = sc.next();
-        database.advancedHeroSearch(advancedHeroSearchTerm);
+        ArrayList<Superhero> søgeResultat = database.advancedHeroSearch(advancedHeroSearchTerm);
+
+        if (søgeResultat.isEmpty()) {
+            System.out.println("no superheroes matching search term found");
+        } else if (søgeResultat.size() == 1) {
+            System.out.println("single superhero found");
+            Superhero superhero = søgeResultat.get(0);
+            System.out.println("Superheltenavn: " + superhero.getSuperHeroName());
+            System.out.println("Superkraft: " + superhero.getSuperPower());
+            System.out.println("Virkeligt navn: " + superhero.getRealName());
+            System.out.println("Oprindelsesår: " + superhero.getCreationYear());
+            System.out.println("Er menneske: " + superhero.isHumanOrNot());
+            System.out.println("Styrke : " + superhero.getStrenght());
+            System.out.println("-----------");
+        } else {
+            System.out.println("multiple superheroes found");
+            for (Superhero superhero : søgeResultat) {
+                System.out.println("Superheltenavn: " + superhero.getSuperHeroName());
+                System.out.println("Superkraft: " + superhero.getSuperPower());
+                System.out.println("Virkeligt navn: " + superhero.getRealName());
+                System.out.println("Oprindelsesår: " + superhero.getCreationYear());
+                System.out.println("Er menneske: " + superhero.isHumanOrNot());
+                System.out.println("Styrke : " + superhero.getStrenght());
+                System.out.println("-----------");
+            }
+        }
     }
-     public void startUp() {
-        UI program = new UI();
-        program.getvelkommen();
+    private void getSearchAndEdit(){
+        System.out.println("Indtast det du vil søge efter");
+        String searchAndEditTerm = sc.next();
+        ArrayList<Superhero> søgeResultat = database.advancedHeroSearch(searchAndEditTerm);
+        System.out.println("indtast nr på den person der skal redigeres:");
+        int nr = sc.nextInt();
+        sc.nextLine();
+        Superhero editHero = søgeResultat.get(nr - 1);
+        System.out.println("Editperson: " + editHero);
+        System.out.println("Rediger data og tryk ENTER. Hvis data ikke skal redigeres tryk ENTER");
+        System.out.println("Superheltnavn: " + editHero.getSuperHeroName());
+        String newSuperHeroName = sc.nextLine();
+        if (!newSuperHeroName.isEmpty())
+            editHero.setSuperHeroName(newSuperHeroName);
+
+        System.out.println("Superkraft: " + editHero.getSuperPower());
+        String newSuperPower = sc.nextLine();
+        if (!newSuperPower.isEmpty())
+            editHero.setSuperPower(newSuperPower);
+
+        System.out.println("Virkelight navn: " + editHero.getRealName());
+        String newRealName = sc.nextLine();
+        if (!newRealName.isEmpty())
+            editHero.setRealName(newRealName);
+
+        System.out.println("Oprindelsesår: " + editHero.getCreationYear());
+        String newCreationYear = sc.nextLine();
+        if (!newCreationYear.isEmpty())
+            editHero.setCreationYear(newCreationYear);
+
+        System.out.println("Menneske eller ej (j)a/(n)ej: " + editHero.isHumanOrNot());
+        String newHumanOrNot = sc.nextLine();
+        if (!newHumanOrNot.isEmpty())
+            editHero.setHumanOrNot(newHumanOrNot);
+
+        System.out.println("Styrkeværdi: " + editHero.getStrenght());
+        String newStrenght = sc.nextLine();
+        if (!newStrenght.isEmpty())
+            editHero.setStrenght(newStrenght);
     }
-}
+        public void startUp () {
+            UI program = new UI();
+            program.getvelkommen();
+        }
+    }
