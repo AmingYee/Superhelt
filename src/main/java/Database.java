@@ -40,11 +40,8 @@ public class Database {
         for (Superhero hero : superheroes) {
             if (hero.getSuperHeroName().contains(searchAndEditTerm)) {
                 søgeResultat.add(hero);
-            for (int i = 0; i < søgeResultat.size(); i++) {
-                System.out.println(i + 1 + ":" + søgeResultat.get(i));
+                return søgeResultat;
             }
-            }
-            return superheroes;
         } return null;
     }
 }

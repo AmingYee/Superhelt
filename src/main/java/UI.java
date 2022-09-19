@@ -81,7 +81,6 @@ public class UI {
         String superPower = sc.next();
         sc.nextLine();
         System.out.println("Indtast styrkeværdi 1.0 svarer til normalt menneske");
-        sc.nextLine();
         double strenght = 0;
         boolean strenghtLoopEndValue = true;
         do {
@@ -151,6 +150,9 @@ public class UI {
         String searchAndEditTerm = sc.next();
         ArrayList<Superhero> søgeResultat = database.searchAndEdit(searchAndEditTerm);
         if (!søgeResultat.isEmpty()) {
+            for (int i = 0; i < søgeResultat.size(); i++) {
+                System.out.println(i + 1 + ":" + søgeResultat.get(i));
+            }
             System.out.println("indtast nr på den superhelt der skal redigeres:");
             int nr = sc.nextInt();
             sc.nextLine();
@@ -186,10 +188,12 @@ public class UI {
             String newStrenght = sc.nextLine();
             if (!newStrenght.isEmpty())
                 editHero.setStrenght(newStrenght);
-        } else {
-            System.out.println("Der findes ingen personer i listen med navn: " + "\"" + searchAndEditTerm + "\"");
+        }
+        else if (søgeResultat.isEmpty()){
+            System.out.println("Der findes ingen superhelt i databasen som hedder " + searchAndEditTerm);
         }
     }
+
     public void startUp () {
         UI program = new UI();
         program.getvelkommen();
