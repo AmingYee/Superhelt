@@ -31,14 +31,21 @@ public class Database {
                 søgeResultat.add(hero);
             }
             return superheroes;
-        } return null;
-    }
-    public ArrayList<Superhero> searchAndEdit(String searchAndEditTerm){
-        ArrayList<Superhero> søgeResultat = new ArrayList<>();
-        for (int i = 0; i < søgeResultat.size(); i++) {
-            System.out.println(i + 1 + ":" + søgeResultat.get(i));
         }
-        return superheroes;
+        return null;
+    }
+
+    public ArrayList<Superhero> searchAndEdit(String searchAndEditTerm) {
+        ArrayList<Superhero> søgeResultat = new ArrayList<>();
+        for (Superhero hero : superheroes) {
+            if (hero.getSuperHeroName().contains(searchAndEditTerm)) {
+                søgeResultat.add(hero);
+            }
+            for (int i = 0; i < søgeResultat.size(); i++) {
+                System.out.println(i + 1 + ":" + søgeResultat.get(i));
+            }
+            return superheroes;
+        } return null;
     }
 }
  /*   public void advancedHeroSearch(String advancedHeroSearchTerm) {
