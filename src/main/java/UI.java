@@ -147,7 +147,8 @@ public class UI {
     private void getSearchAndEdit(){
         System.out.println("Indtast det du vil søge efter");
         String searchAndEditTerm = sc.next();
-        ArrayList<Superhero> søgeResultat = database.advancedHeroSearch(searchAndEditTerm);
+        ArrayList<Superhero> søgeResultat = database.searchAndEdit(searchAndEditTerm);
+        if (!søgeResultat.isEmpty())
         System.out.println("indtast nr på den person der skal redigeres:");
         int nr = sc.nextInt();
         sc.nextLine();
@@ -183,6 +184,8 @@ public class UI {
         String newStrenght = sc.nextLine();
         if (!newStrenght.isEmpty())
             editHero.setStrenght(newStrenght);
+        else
+            System.out.println("Der findes ingen personer i listen med navn: " + "\"" + searchAndEditTerm + "\"");
     }
         public void startUp () {
             UI program = new UI();
