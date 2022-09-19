@@ -10,7 +10,7 @@ public class UI {
         System.out.println("---------------------------------------");
         UI program = new UI();
         String menuValg;
-        Boolean velkommenLoopEndValue = true;
+        boolean velkommenLoopEndValue = true;
         System.out.println("Velkommen til superhelte database");
         do {
             System.out.println("(1) for at oprette ny superhelt");
@@ -35,6 +35,7 @@ public class UI {
                 velkommenLoopEndValue = false;
             } else {
                 System.out.println("indtast et tal fra menues for at fortsætte");
+                System.out.println("--------------");
             }
         }
         while (velkommenLoopEndValue);
