@@ -40,8 +40,9 @@ public class Database {
         for (Superhero hero : superheroes) {
             if (hero.getSuperHeroName().contains(searchAndEditTerm)) {
                 søgeResultat.add(hero);
-                return søgeResultat;
             }
-        } return null;
+            return superheroes;
+        }
+        return null;
     }
 }
