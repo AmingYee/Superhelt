@@ -147,7 +147,8 @@ public class UI {
     }
     private void getSearchAndEdit() {
         System.out.println("Indtast det du vil søge efter");
-        String searchAndEditTerm = sc.next();
+        String searchAndEditTerm = sc.nextLine();
+        sc.nextLine();
         ArrayList<Superhero> søgeResultat = database.searchAndEdit(searchAndEditTerm);
         if (database.searchAndEdit(searchAndEditTerm) != null) {
             for (int i = 0; i < søgeResultat.size(); i++) {
@@ -157,7 +158,7 @@ public class UI {
             int nr = sc.nextInt();
             sc.nextLine();
             Superhero editHero = søgeResultat.get(nr - 1);
-            System.out.println("Editperson: " + editHero);
+            System.out.println("Rediger supherhelt: " + editHero.getSuperHeroName());
             System.out.println("Rediger data og tryk ENTER. Hvis data ikke skal redigeres tryk ENTER");
             System.out.println("Superheltnavn: " + editHero.getSuperHeroName());
             String newSuperHeroName = sc.nextLine();
