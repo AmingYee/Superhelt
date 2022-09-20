@@ -17,7 +17,7 @@ public class UI {
             System.out.println("(2) for at se liste");
             System.out.println("(3) for at søge på enkelt superhelt i listen");
             System.out.println("(4) for at søge på flere superhelte i listen");
-            System.out.println("(5) for at redigere");
+            System.out.println("(5) for at søge og redigere");
             System.out.println("(9) for at afslutte");
             menuValg = sc.next();
             sc.nextLine();
@@ -150,6 +150,7 @@ public class UI {
         String searchAndEditTerm = sc.nextLine();
         sc.nextLine();
         ArrayList<Superhero> søgeResultat = database.searchAndEdit(searchAndEditTerm);
+
         if (database.searchAndEdit(searchAndEditTerm) != null) {
             for (int i = 0; i < søgeResultat.size(); i++) {
                 System.out.println(i + 1 + ":" + søgeResultat.get(i));
