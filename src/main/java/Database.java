@@ -30,9 +30,8 @@ public class Database {
             if (hero.getSuperHeroName().contains(advancedHeroSearchTerm)) {
                 søgeResultat.add(hero);
             }
-            return superheroes;
         }
-        return null;
+        return søgeResultat;
     }
 
     public ArrayList<Superhero> searchAndEdit(String searchAndEditTerm) {
@@ -41,8 +40,12 @@ public class Database {
             if (hero.getSuperHeroName().contains(searchAndEditTerm)) {
                 søgeResultat.add(hero);
             }
-            return superheroes;
         }
-        return null;
+        return søgeResultat;
+    }
+    public boolean deleteSuperHero (Superhero superhero){
+        boolean success = true;
+        // TODO: fake metode
+        return success;
     }
 }

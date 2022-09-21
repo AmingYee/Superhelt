@@ -151,7 +151,9 @@ public class UI {
         sc.nextLine();
         ArrayList<Superhero> søgeResultat = database.searchAndEdit(searchAndEditTerm);
 
-        if (database.searchAndEdit(searchAndEditTerm) != null) {
+        if (søgeResultat.size() == 0) {
+            System.out.println("Der findes ingen superhelt i databasen som hedder " + searchAndEditTerm);
+        } else {
             for (int i = 0; i < søgeResultat.size(); i++) {
                 System.out.println(i + 1 + ":" + søgeResultat.get(i));
             }
@@ -189,7 +191,7 @@ public class UI {
             System.out.println("Oprindelsesår: " + editHero.getCreationYear());
             boolean newCreationYearLoopEndValue = true;
             do {
-            String newCreationYear = sc.nextLine();
+            String newCreationYear = sc.nextLine().trim();
                 try {
                     if (!newCreationYear.isEmpty())
                         editHero.setCreationYear(newCreationYear);
@@ -211,7 +213,7 @@ public class UI {
                 } else if (jaNej.equalsIgnoreCase("n")) {
                     newHumanOrNot = String.valueOf(false);
                     humanLoopEndValue = false;
-                } else {
+                } else{
                     System.out.println("indtast j eller n");
                 }
             } while (humanLoopEndValue);
@@ -223,7 +225,7 @@ public class UI {
             System.out.println("Styrkeværdi: " + editHero.getStrenght());
             boolean newStrenghtLoopEndValue = true;
             do {
-                String newStrenght = sc.nextLine();
+                String newStrenght = sc.nextLine().trim();
                 try {
                     if (!newStrenght.isEmpty())
                         editHero.setStrenght(newStrenght);
@@ -232,9 +234,6 @@ public class UI {
                     System.out.println("indtast styrkeværdi i tal");
                 }
             }while (newStrenghtLoopEndValue);
-        }
-        else{
-            System.out.println("Der findes ingen superhelt i databasen som hedder " + searchAndEditTerm);
         }
     }
 
