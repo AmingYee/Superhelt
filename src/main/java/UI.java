@@ -121,9 +121,9 @@ public class UI {
         ArrayList<Superhero> søgeResultat = database.advancedHeroSearch(advancedHeroSearchTerm);
 
         if (søgeResultat.isEmpty()) {
-            System.out.println("no superheroes matching search term found");
+            System.out.println("Der findes ingen superhelt i databasen som hedder " + advancedHeroSearchTerm);
         } else if (søgeResultat.size() == 1) {
-            System.out.println("single superhero found");
+            System.out.println("en superhero fundet");
             Superhero superhero = søgeResultat.get(0);
             System.out.println("Superheltenavn: " + superhero.getSuperHeroName());
             System.out.println("Superkraft: " + superhero.getSuperPower());
@@ -133,7 +133,7 @@ public class UI {
             System.out.println("Styrke : " + superhero.getStrenght());
             System.out.println("-----------");
         } else {
-            System.out.println("multiple superheroes found");
+            System.out.println("flere superhelte som matcher dit søgeterm fundet");
             for (Superhero superhero : søgeResultat) {
                 System.out.println("Superheltenavn: " + superhero.getSuperHeroName());
                 System.out.println("Superkraft: " + superhero.getSuperPower());
@@ -147,30 +147,98 @@ public class UI {
     }
     private void getSearchAndEdit() {
         System.out.println("Indtast det du vil søge efter");
-        String searchAndEditTerm = sc.nextLine();
-        sc.nextLine();
+        String searchAndEditTerm = sc.next();
         ArrayList<Superhero> søgeResultat = database.searchAndEdit(searchAndEditTerm);
-
         if (søgeResultat.size() == 0) {
             System.out.println("Der findes ingen superhelt i databasen som hedder " + searchAndEditTerm);
-        } else {
+        }
+        else if (søgeResultat.size() == 1) {
+            System.out.println("en superhero fundet");
+            Superhero editHero = søgeResultat.get(0);
+            System.out.println("Redigerer supherhelt: " + editHero.getSuperHeroName());
+            System.out.println("Rediger data og tryk ENTER. Hvis data ikke skal redigeres tryk ENTER");
+            System.out.println("Superheltnavn: " + editHero.getSuperHeroName());
+            String newSuperHeroName = sc.nextLine().trim();
+            sc.nextLine();
+            if (!newSuperHeroName.isEmpty())
+                editHero.setSuperHeroName(newSuperHeroName);
+
+            System.out.println("Superkraft: " + editHero.getSuperPower());
+            String newSuperPower = sc.nextLine().trim();
+            if (!newSuperPower.isEmpty())
+                editHero.setSuperPower(newSuperPower);
+
+            System.out.println("Virkelight navn: " + editHero.getRealName());
+            String newRealName = sc.nextLine().trim();
+            if (!newRealName.isEmpty())
+                editHero.setRealName(newRealName);
+
+            System.out.println("Oprindelsesår: " + editHero.getCreationYear());
+            boolean newCreationYearLoopEndValue = true;
+            do {
+                String newCreationYear = sc.nextLine().trim();
+                try {
+                    if (!newCreationYear.isEmpty())
+                        editHero.setCreationYear(newCreationYear);
+                    newCreationYearLoopEndValue = false;
+                } catch(NumberFormatException e){
+                    System.out.println("indtast året han blev lavet i hele tal");
+                }
+            }while (newCreationYearLoopEndValue);
+
+            System.out.println("Menneske eller ej (j)a/(n)ej: " + editHero.isHumanOrNot());
+            String newHumanOrNot = null;
+            boolean humanLoopEndValue = true;
+            do {
+                String jaNej = sc.nextLine();
+                if (jaNej.isEmpty()) {
+                    humanLoopEndValue = false;
+                } else if (jaNej.equalsIgnoreCase("j")) {
+                    newHumanOrNot = String.valueOf(true);
+                    humanLoopEndValue = false;
+                } else if (jaNej.equalsIgnoreCase("n")) {
+                    newHumanOrNot = String.valueOf(false);
+                    humanLoopEndValue = false;
+                }else{
+                    System.out.println("indtast j eller n");
+                }
+            } while (humanLoopEndValue);
+            editHero.setHumanOrNot(newHumanOrNot);
+
+            System.out.println("Styrkeværdi: " + editHero.getStrenght());
+            boolean newStrenghtLoopEndValue = true;
+            do {
+                String newStrenght = sc.nextLine().trim();
+                try {
+                    if (!newStrenght.isEmpty())
+                        editHero.setStrenght(newStrenght);
+                    newStrenghtLoopEndValue = false;
+                } catch(NumberFormatException e){
+                    System.out.println("indtast styrkeværdi i tal");
+                }
+            }while (newStrenghtLoopEndValue);
+        }
+        else {
             for (int i = 0; i < søgeResultat.size(); i++) {
                 System.out.println(i + 1 + ":" + søgeResultat.get(i));
             }
-            System.out.println("indtast nr på den superhelt der skal redigeres:");
+            System.out.println("flere superhelte som matcher dit søgeterm fundet" + "\nindtast nr på den superhelt der skal redigeres:");
             int nr = 0;
             boolean selectorLoopEndValue = true;
             do {
-                if (sc.hasNextInt()) {
-                    nr = sc.nextInt();
-                    sc.nextLine();
+                nr = sc.nextInt();
+                sc.nextLine();
+                if (nr -1 < søgeResultat.size()) {
                     selectorLoopEndValue = false;
+                } else if (nr -1 > søgeResultat.size()){
+                    System.out.println("indtast nr på den superhelt der skal redigeres: ");
                 } else {
                     System.out.println("indtast nr på den superhelt der skal redigeres: ");
-                    sc.nextLine();
                 }
             } while (selectorLoopEndValue);
+
             Superhero editHero = søgeResultat.get(nr - 1);
+
             System.out.println("Redigerer supherhelt: " + editHero.getSuperHeroName());
             System.out.println("Rediger data og tryk ENTER. Hvis data ikke skal redigeres tryk ENTER");
             System.out.println("Superheltnavn: " + editHero.getSuperHeroName());
@@ -195,32 +263,30 @@ public class UI {
                 try {
                     if (!newCreationYear.isEmpty())
                         editHero.setCreationYear(newCreationYear);
-                        newCreationYearLoopEndValue = false;
+                    newCreationYearLoopEndValue = false;
                     } catch(NumberFormatException e){
                         System.out.println("indtast året han blev lavet i hele tal");
                     }
             }while (newCreationYearLoopEndValue);
 
             System.out.println("Menneske eller ej (j)a/(n)ej: " + editHero.isHumanOrNot());
-            String jaNej;
             String newHumanOrNot = null;
             boolean humanLoopEndValue = true;
             do {
-                jaNej = sc.next();
-                if (jaNej.equalsIgnoreCase("j")) {
+                String jaNej = sc.nextLine();
+                if (jaNej.isEmpty()) {
+                    humanLoopEndValue = false;
+                } else if (jaNej.equalsIgnoreCase("j")) {
                     newHumanOrNot = String.valueOf(true);
                     humanLoopEndValue = false;
                 } else if (jaNej.equalsIgnoreCase("n")) {
                     newHumanOrNot = String.valueOf(false);
                     humanLoopEndValue = false;
-                } else{
+                }else{
                     System.out.println("indtast j eller n");
                 }
             } while (humanLoopEndValue);
-
-            if (!newHumanOrNot.isEmpty())
-                editHero.setHumanOrNot(newHumanOrNot);
-
+            editHero.setHumanOrNot(newHumanOrNot);
 
             System.out.println("Styrkeværdi: " + editHero.getStrenght());
             boolean newStrenghtLoopEndValue = true;
