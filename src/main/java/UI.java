@@ -309,39 +309,58 @@ public class UI {
         System.out.println("Indtast det du vil søge efter");
         String searchAndEditTerm = sc.next();
         ArrayList<Superhero> searchResult = database.searchAndEdit(searchAndEditTerm);
-        for (int i = 0; i < searchResult.size(); i++) {
-            System.out.println(i + 1 + ":" + searchResult.get(i));
+        if (searchResult.size() == 0) {
+            System.out.println("Der findes ingen superhelt i databasen som hedder " + searchAndEditTerm);
+        } else if (searchResult.size() == 1) {
+            Superhero deleteHero = searchResult.get(0);
+            System.out.println("er du sikker på at du vil slette \n" + searchResult.get(0) + "\n (j)a/(n)ej");
+            boolean deleteLoopEndValue = true;
+            do {
+                String jaNej = sc.nextLine();
+                if (jaNej.equalsIgnoreCase("j")) {
+                    database.deleteSuperHero(deleteHero);
+                    deleteLoopEndValue = false;
+                } else if (jaNej.equalsIgnoreCase("n")) {
+                    deleteLoopEndValue = false;
+                } else {
+                    System.out.println("indtast j eller n");
+                }
+            } while (deleteLoopEndValue);
+
+        } else {
+            for (int i = 0; i < searchResult.size(); i++) {
+                System.out.println(i + 1 + ":" + searchResult.get(i));
+            }
+            System.out.println("superhelte der matcher dit søgeterm fundet \nindtast nr på den superhelt der skal redigeres:");
+            int nr = 0;
+            boolean selectorLoopEndValue = true;
+            do {
+                nr = sc.nextInt();
+                sc.nextLine();
+                if (nr - 1 < searchResult.size()) {
+                    selectorLoopEndValue = false;
+                } else if (nr - 1 > searchResult.size()) {
+                    System.out.println("indtast nr på den superhelt der skal slettes: ");
+                } else {
+                    System.out.println("indtast nr på den superhelt der skal slettes: ");
+                }
+            } while (selectorLoopEndValue);
+
+            Superhero deleteHero = searchResult.get(nr - 1);
+            System.out.println("er du sikker på at du vil slette \n" + searchResult.get(nr - 1) + "\n (j)a/(n)ej");
+            boolean deleteLoopEndValue = true;
+            do {
+                String jaNej = sc.nextLine();
+                if (jaNej.equalsIgnoreCase("j")) {
+                    database.deleteSuperHero(deleteHero);
+                    deleteLoopEndValue = false;
+                } else if (jaNej.equalsIgnoreCase("n")) {
+                    deleteLoopEndValue = false;
+                } else {
+                    System.out.println("indtast j eller n");
+                }
+            } while (deleteLoopEndValue);
         }
-        System.out.println("superhelte der matcher dit søgeterm fundet \nindtast nr på den superhelt der skal redigeres:");
-        int nr = 0;
-        boolean selectorLoopEndValue = true;
-        do {
-            nr = sc.nextInt();
-            sc.nextLine();
-            if (nr - 1 < searchResult.size()) {
-                selectorLoopEndValue = false;
-            } else if (nr - 1 > searchResult.size()) {
-                System.out.println("indtast nr på den superhelt der skal slettes: ");
-            } else {
-                System.out.println("indtast nr på den superhelt der skal slettes: ");
-            }
-        } while (selectorLoopEndValue);
-
-        Superhero deleteHero = searchResult.get(nr - 1);
-        System.out.println("er du sikker på at du vil slette \n" + searchResult.get(nr - 1) + "\n (j)a/(n)ej");
-        boolean deleteLoopEndValue = true;
-        do {
-            String jaNej = sc.nextLine();
-           if (jaNej.equalsIgnoreCase("j")) {
-               database.deleteSuperHero(deleteHero);
-               deleteLoopEndValue = false;
-            } else if (jaNej.equalsIgnoreCase("n")) {
-               deleteLoopEndValue = false;
-            }else{
-               System.out.println("indtast j eller n");
-            }
-        } while (deleteLoopEndValue);
-
     }
     public void startUp () {
         UI program = new UI();
