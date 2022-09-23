@@ -328,7 +328,19 @@ public class UI {
         } while (selectorLoopEndValue);
 
         Superhero deleteHero = searchResult.get(nr - 1);
-        database.deleteSuperHero(deleteHero);
+        System.out.println("er du sikker på at du vil slette \n" + searchResult.get(nr - 1) + "\n (j)a/(n)ej");
+        boolean deleteLoopEndValue = true;
+        do {
+            String jaNej = sc.nextLine();
+           if (jaNej.equalsIgnoreCase("j")) {
+               database.deleteSuperHero(deleteHero);
+               deleteLoopEndValue = false;
+            } else if (jaNej.equalsIgnoreCase("n")) {
+               deleteLoopEndValue = false;
+            }else{
+               System.out.println("indtast j eller n");
+            }
+        } while (deleteLoopEndValue);
 
     }
     public void startUp () {
