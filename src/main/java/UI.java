@@ -226,14 +226,15 @@ public class UI {
             int nr = 0;
             boolean selectorLoopEndValue = true;
             do {
+                if(sc.hasNextInt())
                 nr = sc.nextInt();
                 sc.nextLine();
-                if (nr -1 < søgeResultat.size()) {
-                    selectorLoopEndValue = false;
-                } else if (nr -1 > søgeResultat.size()){
+                if (nr <= 0) {
+                    System.out.println("indtast nr på den superhelt der skal redigeres: ");
+                } else if (nr -1 >= søgeResultat.size()){
                     System.out.println("indtast nr på den superhelt der skal redigeres: ");
                 } else {
-                    System.out.println("indtast nr på den superhelt der skal redigeres: ");
+                    selectorLoopEndValue = false;
                 }
             } while (selectorLoopEndValue);
 
