@@ -17,7 +17,8 @@ public class UI {
             System.out.println("(2) for at se liste");
             System.out.println("(3) for at søge på enkelt superhelt i listen");
             System.out.println("(4) for at søge på flere superhelte i listen");
-            System.out.println("(5) for at søge og redigere");
+            System.out.println("(5) for at søge og redigere en superhelt i listen");
+            System.out.println("(6) for at søge og slete en superhelt i listen");
             System.out.println("(9) for at afslutte");
             menuValg = sc.next();
             sc.nextLine();
@@ -30,6 +31,8 @@ public class UI {
             } else if (menuValg.equals("4")) {
                 program.getAdvancedSearch();
             } else if (menuValg.equals("5")) {
+                program.getSearchAndEdit();
+            } else if (menuValg.equals("6")) {
                 program.getSearchAndEdit();
             } else if (menuValg.equals("9")) {
                 velkommenLoopEndValue = false;
@@ -49,7 +52,7 @@ public class UI {
         sc.nextLine();
         System.out.println("menneske eller ej (j)a/(n)ej");
         String jaNej;
-        Boolean humanOrNot = false;
+        boolean humanOrNot = false;
         boolean humanLoopEndValue = true;
         do {
             jaNej = sc.next();
@@ -227,7 +230,7 @@ public class UI {
             boolean selectorLoopEndValue = true;
             do {
                 if(sc.hasNextInt())
-                nr = sc.nextInt();
+                    nr = sc.nextInt();
                 sc.nextLine();
                 if (nr <= 0) {
                     System.out.println("indtast nr på den superhelt der skal redigeres: ");

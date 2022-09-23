@@ -43,9 +43,8 @@ public class Database {
         }
         return søgeResultat;
     }
-    public boolean deleteSuperHero (Superhero superhero){
-        boolean success = true;
-        // TODO: fake metode
+    public boolean deleteSuperHero (Superhero hero){
+        boolean success = superheroes.remove(hero);
         return success;
     }
 }
