@@ -5,7 +5,7 @@ public class UI {
     Database database = new Database();
     Scanner sc = new Scanner(System.in);
 
-    private void getvelkommen() {
+    private void getMenu() {
         System.out.println("Velkommen til superhelteverdenen!");
         System.out.println("---------------------------------------");
         UI program = new UI();
@@ -17,13 +17,13 @@ public class UI {
             System.out.println("(2) for at se liste");
             System.out.println("(3) for at søge på enkelt superhelt i listen");
             System.out.println("(4) for at søge på flere superhelte i listen");
-            System.out.println("(5) for at søge og redigere en superhelt i listen");
-            System.out.println("(6) for at søge og slete en superhelt i listen");
+            System.out.println("(5) for at søge og redigere efter en superhelt");
+            System.out.println("(6) for at søge og slette en superhelt");
             System.out.println("(9) for at afslutte");
             menuValg = sc.next();
             sc.nextLine();
             if (menuValg.equals("1")) {
-                program.getOpret();
+                program.getCreateHero();
             } else if (menuValg.equals("2")) {
                 program.getList();
             } else if (menuValg.equals("3")) {
@@ -33,7 +33,7 @@ public class UI {
             } else if (menuValg.equals("5")) {
                 program.getSearchAndEdit();
             } else if (menuValg.equals("6")) {
-                program.getSearchAndEdit();
+                program.getSearchAndDelete();
             } else if (menuValg.equals("9")) {
                 velkommenLoopEndValue = false;
             } else {
@@ -43,7 +43,7 @@ public class UI {
         }
         while (velkommenLoopEndValue);
     }
-    private void getOpret() {
+    private void getCreateHero() {
         System.out.println("indtast superheltens navn");
         String superHeroName = sc.next();
         sc.nextLine();
@@ -52,7 +52,7 @@ public class UI {
         sc.nextLine();
         System.out.println("menneske eller ej (j)a/(n)ej");
         String jaNej;
-        boolean humanOrNot = false;
+        Boolean humanOrNot = false;
         boolean humanLoopEndValue = true;
         do {
             jaNej = sc.next();
@@ -121,13 +121,13 @@ public class UI {
     }
     private void getAdvancedSearch() {
         String advancedHeroSearchTerm = sc.next();
-        ArrayList<Superhero> søgeResultat = database.advancedHeroSearch(advancedHeroSearchTerm);
+        ArrayList<Superhero> searchResult = database.advancedHeroSearch(advancedHeroSearchTerm);
 
-        if (søgeResultat.isEmpty()) {
+        if (searchResult.isEmpty()) {
             System.out.println("Der findes ingen superhelt i databasen som hedder " + advancedHeroSearchTerm);
-        } else if (søgeResultat.size() == 1) {
+        } else if (searchResult.size() == 1) {
             System.out.println("en superhero fundet");
-            Superhero superhero = søgeResultat.get(0);
+            Superhero superhero = searchResult.get(0);
             System.out.println("Superheltenavn: " + superhero.getSuperHeroName());
             System.out.println("Superkraft: " + superhero.getSuperPower());
             System.out.println("Virkeligt navn: " + superhero.getRealName());
@@ -137,7 +137,7 @@ public class UI {
             System.out.println("-----------");
         } else {
             System.out.println("flere superhelte som matcher dit søgeterm fundet");
-            for (Superhero superhero : søgeResultat) {
+            for (Superhero superhero : searchResult) {
                 System.out.println("Superheltenavn: " + superhero.getSuperHeroName());
                 System.out.println("Superkraft: " + superhero.getSuperPower());
                 System.out.println("Virkeligt navn: " + superhero.getRealName());
@@ -151,13 +151,13 @@ public class UI {
     private void getSearchAndEdit() {
         System.out.println("Indtast det du vil søge efter");
         String searchAndEditTerm = sc.next();
-        ArrayList<Superhero> søgeResultat = database.searchAndEdit(searchAndEditTerm);
-        if (søgeResultat.size() == 0) {
+        ArrayList<Superhero> searchResult = database.searchAndEdit(searchAndEditTerm);
+        if (searchResult.size() == 0) {
             System.out.println("Der findes ingen superhelt i databasen som hedder " + searchAndEditTerm);
         }
-        else if (søgeResultat.size() == 1) {
+        else if (searchResult.size() == 1) {
             System.out.println("en superhero fundet");
-            Superhero editHero = søgeResultat.get(0);
+            Superhero editHero = searchResult.get(0);
             System.out.println("Redigerer supherhelt: " + editHero.getSuperHeroName());
             System.out.println("Rediger data og tryk ENTER. Hvis data ikke skal redigeres tryk ENTER");
             System.out.println("Superheltnavn: " + editHero.getSuperHeroName());
@@ -222,26 +222,25 @@ public class UI {
             }while (newStrenghtLoopEndValue);
         }
         else {
-            for (int i = 0; i < søgeResultat.size(); i++) {
-                System.out.println(i + 1 + ":" + søgeResultat.get(i));
+            for (int i = 0; i < searchResult.size(); i++) {
+                System.out.println(i + 1 + ":" + searchResult.get(i));
             }
             System.out.println("flere superhelte som matcher dit søgeterm fundet" + "\nindtast nr på den superhelt der skal redigeres:");
             int nr = 0;
             boolean selectorLoopEndValue = true;
             do {
-                if(sc.hasNextInt())
-                    nr = sc.nextInt();
+                nr = sc.nextInt();
                 sc.nextLine();
-                if (nr <= 0) {
-                    System.out.println("indtast nr på den superhelt der skal redigeres: ");
-                } else if (nr -1 >= søgeResultat.size()){
+                if (nr -1 < searchResult.size()) {
+                    selectorLoopEndValue = false;
+                } else if (nr -1 > searchResult.size()){
                     System.out.println("indtast nr på den superhelt der skal redigeres: ");
                 } else {
-                    selectorLoopEndValue = false;
+                    System.out.println("indtast nr på den superhelt der skal redigeres: ");
                 }
             } while (selectorLoopEndValue);
 
-            Superhero editHero = søgeResultat.get(nr - 1);
+            Superhero editHero = searchResult.get(nr - 1);
 
             System.out.println("Redigerer supherhelt: " + editHero.getSuperHeroName());
             System.out.println("Rediger data og tryk ENTER. Hvis data ikke skal redigeres tryk ENTER");
@@ -306,9 +305,34 @@ public class UI {
             }while (newStrenghtLoopEndValue);
         }
     }
+    private void getSearchAndDelete() {
+        System.out.println("Indtast det du vil søge efter");
+        String searchAndEditTerm = sc.next();
+        ArrayList<Superhero> searchResult = database.searchAndEdit(searchAndEditTerm);
+        for (int i = 0; i < searchResult.size(); i++) {
+            System.out.println(i + 1 + ":" + searchResult.get(i));
+        }
+        System.out.println("superhelte der matcher dit søgeterm fundet \nindtast nr på den superhelt der skal redigeres:");
+        int nr = 0;
+        boolean selectorLoopEndValue = true;
+        do {
+            nr = sc.nextInt();
+            sc.nextLine();
+            if (nr - 1 < searchResult.size()) {
+                selectorLoopEndValue = false;
+            } else if (nr - 1 > searchResult.size()) {
+                System.out.println("indtast nr på den superhelt der skal slettes: ");
+            } else {
+                System.out.println("indtast nr på den superhelt der skal slettes: ");
+            }
+        } while (selectorLoopEndValue);
 
+        Superhero deleteHero = searchResult.get(nr - 1);
+        database.deleteSuperHero(deleteHero);
+
+    }
     public void startUp () {
         UI program = new UI();
-        program.getvelkommen();
+        program.getMenu();
     }
 }

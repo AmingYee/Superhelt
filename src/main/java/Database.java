@@ -25,23 +25,23 @@ public class Database {
     }
 
     public ArrayList<Superhero> advancedHeroSearch(String advancedHeroSearchTerm) {
-        ArrayList<Superhero> søgeResultat = new ArrayList<>();
+        ArrayList<Superhero> searchResult = new ArrayList<>();
         for (Superhero hero : superheroes) {
             if (hero.getSuperHeroName().contains(advancedHeroSearchTerm)) {
-                søgeResultat.add(hero);
+                searchResult.add(hero);
             }
         }
-        return søgeResultat;
+        return searchResult;
     }
 
     public ArrayList<Superhero> searchAndEdit(String searchAndEditTerm) {
-        ArrayList<Superhero> søgeResultat = new ArrayList<>();
+        ArrayList<Superhero> searchResult = new ArrayList<>();
         for (Superhero hero : superheroes) {
             if (hero.getSuperHeroName().contains(searchAndEditTerm)) {
-                søgeResultat.add(hero);
+                searchResult.add(hero);
             }
         }
-        return søgeResultat;
+        return searchResult;
     }
     public boolean deleteSuperHero (Superhero hero){
         boolean success = superheroes.remove(hero);
