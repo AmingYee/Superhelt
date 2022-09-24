@@ -52,7 +52,7 @@ public class UI {
         sc.nextLine();
         System.out.println("menneske eller ej (j)a/(n)ej");
         String jaNej;
-        Boolean humanOrNot = false;
+        boolean humanOrNot = false;
         boolean humanLoopEndValue = true;
         do {
             jaNej = sc.next();
@@ -226,7 +226,7 @@ public class UI {
                 System.out.println(i + 1 + ":" + searchResult.get(i));
             }
             System.out.println("flere superhelte som matcher dit søgeterm fundet" + "\nindtast nr på den superhelt der skal redigeres:");
-            int nr = 0;
+            int nr;
             boolean selectorLoopEndValue = true;
             do {
                 nr = sc.nextInt();
@@ -312,6 +312,7 @@ public class UI {
         if (searchResult.size() == 0) {
             System.out.println("Der findes ingen superhelt i databasen som hedder " + searchAndEditTerm);
         } else if (searchResult.size() == 1) {
+            System.out.println("en superhero fundet");
             Superhero deleteHero = searchResult.get(0);
             System.out.println("er du sikker på at du vil slette \n" + searchResult.get(0) + "\n (j)a/(n)ej");
             boolean deleteLoopEndValue = true;
@@ -332,7 +333,7 @@ public class UI {
                 System.out.println(i + 1 + ":" + searchResult.get(i));
             }
             System.out.println("superhelte der matcher dit søgeterm fundet \nindtast nr på den superhelt der skal redigeres:");
-            int nr = 0;
+            int nr;
             boolean selectorLoopEndValue = true;
             do {
                 nr = sc.nextInt();

@@ -1,8 +1,6 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Database {
-    Scanner sc = new Scanner(System.in);
     private ArrayList<Superhero> superheroes = new ArrayList<>();
 
     public void createSuperHero(String superHeroName, String realName, boolean humanOrNot, int creationYear, String superPower, double strenght) {
