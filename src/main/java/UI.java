@@ -312,6 +312,7 @@ public class UI {
         if (searchResult.size() == 0) {
             System.out.println("Der findes ingen superhelt i databasen som hedder " + searchAndEditTerm);
         } else if (searchResult.size() == 1) {
+            System.out.println("en superhero fundet");
             Superhero deleteHero = searchResult.get(0);
             System.out.println("er du sikker på at du vil slette \n" + searchResult.get(0) + "\n (j)a/(n)ej");
             boolean deleteLoopEndValue = true;
