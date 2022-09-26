@@ -226,17 +226,18 @@ public class UI {
                 System.out.println(i + 1 + ":" + searchResult.get(i));
             }
             System.out.println("flere superhelte som matcher dit søgeterm fundet" + "\nindtast nr på den superhelt der skal redigeres:");
-            int nr;
+            int nr = 0;
             boolean selectorLoopEndValue = true;
             do {
-                nr = sc.nextInt();
+                if(sc.hasNextInt())
+                    nr = sc.nextInt();
                 sc.nextLine();
-                if (nr -1 < searchResult.size()) {
-                    selectorLoopEndValue = false;
-                } else if (nr -1 > searchResult.size()){
+                if (nr <= 0) {
+                    System.out.println("indtast nr på den superhelt der skal redigeres: ");
+                } else if (nr -1 >= searchResult.size()){
                     System.out.println("indtast nr på den superhelt der skal redigeres: ");
                 } else {
-                    System.out.println("indtast nr på den superhelt der skal redigeres: ");
+                    selectorLoopEndValue = false;
                 }
             } while (selectorLoopEndValue);
 
@@ -333,17 +334,18 @@ public class UI {
                 System.out.println(i + 1 + ":" + searchResult.get(i));
             }
             System.out.println("superhelte der matcher dit søgeterm fundet \nindtast nr på den superhelt der skal redigeres:");
-            int nr;
+            int nr = 0;
             boolean selectorLoopEndValue = true;
             do {
-                nr = sc.nextInt();
+                if(sc.hasNextInt())
+                    nr = sc.nextInt();
                 sc.nextLine();
-                if (nr - 1 < searchResult.size()) {
-                    selectorLoopEndValue = false;
-                } else if (nr - 1 > searchResult.size()) {
+                if (nr <= 0) {
+                    System.out.println("indtast nr på den superhelt der skal slettes: ");
+                } else if (nr -1 >= searchResult.size()){
                     System.out.println("indtast nr på den superhelt der skal slettes: ");
                 } else {
-                    System.out.println("indtast nr på den superhelt der skal slettes: ");
+                    selectorLoopEndValue = false;
                 }
             } while (selectorLoopEndValue);
 
