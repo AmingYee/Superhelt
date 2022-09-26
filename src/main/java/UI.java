@@ -22,27 +22,36 @@ public class UI {
             System.out.println("(9) for at afslutte");
             menuValg = sc.next();
             sc.nextLine();
-            if (menuValg.equals("1")) {
-                program.getCreateHero();
-            } else if (menuValg.equals("2")) {
-                program.getList();
-            } else if (menuValg.equals("3")) {
-                program.getSearch();
-            } else if (menuValg.equals("4")) {
-                program.getAdvancedSearch();
-            } else if (menuValg.equals("5")) {
-                program.getSearchAndEdit();
-            } else if (menuValg.equals("6")) {
-                program.getSearchAndDelete();
-            } else if (menuValg.equals("9")) {
-                velkommenLoopEndValue = false;
-            } else {
-                System.out.println("indtast et tal fra menues for at fortsætte");
-                System.out.println("--------------");
+            switch (menuValg) {
+                case "1":
+                    program.getCreateHero();
+                    break;
+                case "2":
+                    program.getList();
+                    break;
+                case "3":
+                    program.getSearch();
+                    break;
+                case "4":
+                    program.getAdvancedSearch();
+                    break;
+                case "5":
+                    program.getSearchAndEdit();
+                    break;
+                case "6":
+                    program.getSearchAndDelete();
+                    break;
+                case "9":
+                    velkommenLoopEndValue = false;
+                    break;
+                default:
+                    System.out.println("indtast et tal fra menues for at fortsætte");
+                    System.out.println("--------------");
+                }
             }
-        }
         while (velkommenLoopEndValue);
-    }
+        }
+
     private void getCreateHero() {
         System.out.println("indtast superheltens navn");
         String superHeroName = sc.next();
